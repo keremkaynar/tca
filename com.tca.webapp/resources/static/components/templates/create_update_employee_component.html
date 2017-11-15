@@ -1,0 +1,96 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="lead">Create/Update Employee</span>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<label class="col-md-2 control-lable" for="firstName">First
+				Name</label>
+			<div class="col-md-6">
+				<input type="text" id="firstName"
+					[(ngModel)]="currentEmployee.firstName" class="input-sm"
+					placeholder="Enter your first name..." />
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<label class="col-md-2 control-lable" for="lastName">Last
+				Name</label>
+			<div class="col-md-6">
+				<input type="text" id="lastName" [(ngModel)]="currentEmployee.lastName"
+					class="input-sm" placeholder="Enter your last name..." />
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<label class="col-md-2 control-lable" for="address">Address</label>
+			<div class="col-md-6">
+				<input type="text" id="address" [(ngModel)]="currentEmployee.address"
+					class="input-sm" placeholder="Enter your address..." />
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8">
+			<label class="col-md-2 control-lable" for="email">Email</label>
+			<div class="col-md-6">
+				<input type="text" id="email" [(ngModel)]="currentEmployee.mail"
+					class="input-sm" placeholder="Enter your email..." />
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<h3>Certificates</h3>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<ul>
+				<li *ngFor="let certificate of currentEmployee.certificates">
+					<div (click)="currentCertificate=certificate">{{certificate.name}} - {{certificate.type}}</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<label class="col-md-2 control-lable" for="certificateName">Name</label>
+			<div class="col-md-4">
+				<input type="text" id="certificateName"
+					[(ngModel)]="createdCertificate.name" class="input-sm"
+					placeholder="Enter your certificate name..." />
+			</div>
+			<label class="col-md-2 control-lable" for="certificateType">Type</label>
+			<div class="col-md-4">
+				<input type="text" id="certificateType"
+					[(ngModel)]="createdCertificate.type" class="input-sm"
+					placeholder="Enter your certificate type..." />
+			</div>
+			<div class="col-md-6">
+				<button type="button" (click)="addCertificate()"
+					class="btn btn-default pull-right">Add</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<button type="button" (click)="deleteCertificate()"
+				class="btn btn-default pull-right">Delete</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<button type="button" (click)="saveEmployee()"
+				class="btn btn-default pull-left">Save Employee</button>
+		</div>
+	</div>
+
+</div>
