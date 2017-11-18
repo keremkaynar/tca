@@ -13,6 +13,8 @@ export class ShowContactsComponent implements OnInit {
 	
 	public currentTeam: null;
 	
+	public createdTeamName: null;
+	
 	public contacts: [];
 
 	public currentContact: null;
@@ -25,6 +27,32 @@ export class ShowContactsComponent implements OnInit {
    		this.contactServices = contactServices;
    		this.router = router;
    	}
+	
+	createTeam() {
+		console.log("Create team is called...");
+		if(createdTeamName!=null)
+		{
+			let createdTeam = {};
+			createdTeam.name = createdTeamName;
+			this.contactServices.createTeam(createdTeam).subscribe(team => {
+				console.log("Created team: "+team);
+				this.currentTeam = team;
+				teams.put(team);
+			}, error => console.error(error));
+		}
+	}
+	
+	deleteTeam() {
+		console.log("Delete team is called...");
+		if(currentTeam!=null)
+		{
+			this.contactServices.deleteTeam(currenTeam.id).subscribe(ret => {
+				console.log("Deleted team: "+currentTeam);
+				teams.remove(currentTeam);
+				this.currentTeam = null;
+			}, error => console.error(error));
+		}
+	}
 	
 	getAllTeams() {
 		console.log("Get all teams is called...");

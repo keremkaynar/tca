@@ -16,6 +16,15 @@
 					[ngClass]="{'active': currentTeam==team}"
 					class="list-group-item">{{team.name}}</li>
 			</ul>
+			<div>
+				<label class="control-lable" for="teamName">Team Name</label>
+				<input type="text" id="teamName" [(ngModel)]="createdTeamName"
+					class="input-sm" placeholder="Enter team name..." />
+				<button type="button" (click)="createTeam()"
+					class="btn btn-default pull-right">Create</button>
+				<button type="button" (click)="deleteTeam()"
+					class="btn btn-default pull-right">Delete</button>
+			</div>
 		</div>
 		<div class="col-md-8">
 			<table class="table table-hover">

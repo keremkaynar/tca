@@ -15,31 +15,41 @@ import com.tca.dao.service.TcaDataService;
 
 @RestController
 public class TcaController {
-  @Autowired
-  private TcaDataService tcaDataService;
+	@Autowired
+	private TcaDataService tcaDataService;
 
-  @RequestMapping(value = "/getallteams", method = RequestMethod.GET, headers = "Accept=application/json")
-  public List<Team> getAllTeams() {
-    return tcaDataService.findAllTeams();
-  }
-  
-  @RequestMapping(value = "/{teamName}/getallcontacts", method = RequestMethod.GET, headers = "Accept=application/json")
-  public List<ContactPerson> getAllContactPersons(@PathVariable("teamName") String teamName) {
-    return tcaDataService.findContactPersonsByTeam(teamName);
-  }
+	@RequestMapping(value = "/createteam", method = RequestMethod.POST, headers = "Accept=application/json")
+	public Team createTeam(@RequestBody Team team) {
+		return tcaDataService.createTeam(team);
+	}
 
-  @RequestMapping(value = "/addcontact", method = RequestMethod.POST, headers = "Accept=application/json")
-  public ContactPerson addContactPerson(@RequestBody ContactPerson contactPerson) {
-    return tcaDataService.saveContactPerson(contactPerson);
-  }
+	@RequestMapping(value = "/deleteteam/{teamId}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+	public void deleteTeam(@PathVariable("teamId") Integer teamId) {
+		tcaDataService.deleteTeam(teamId);
+	}
 
-  @RequestMapping(value = "/updatecontact", method = RequestMethod.PUT, headers = "Accept=application/json")
-  public ContactPerson updateContactPerson(@RequestBody ContactPerson contactPerson) {
-    return tcaDataService.saveContactPerson(contactPerson);
-  }
+	@RequestMapping(value = "/getallteams", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<Team> getAllTeams() {
+		return tcaDataService.findAllTeams();
+	}
 
-  @RequestMapping(value = "/deletecontact/{contactPersonId}", method = RequestMethod.DELETE, headers = "Accept=application/json")
-  public void deleteContactPerson(@PathVariable("contactPersonId") Integer contactPersonId) {
-    tcaDataService.deleteContactPerson(contactPersonId);
-  }
+	@RequestMapping(value = "/{teamName}/getallcontacts", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<ContactPerson> getAllContactPersons(@PathVariable("teamName") String teamName) {
+		return tcaDataService.findContactPersonsByTeam(teamName);
+	}
+
+	@RequestMapping(value = "/addcontact", method = RequestMethod.POST, headers = "Accept=application/json")
+	public ContactPerson addContactPerson(@RequestBody ContactPerson contactPerson) {
+		return tcaDataService.saveContactPerson(contactPerson);
+	}
+
+	@RequestMapping(value = "/updatecontact", method = RequestMethod.PUT, headers = "Accept=application/json")
+	public ContactPerson updateContactPerson(@RequestBody ContactPerson contactPerson) {
+		return tcaDataService.saveContactPerson(contactPerson);
+	}
+
+	@RequestMapping(value = "/deletecontact/{contactPersonId}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+	public void deleteContactPerson(@PathVariable("contactPersonId") Integer contactPersonId) {
+		tcaDataService.deleteContactPerson(contactPersonId);
+	}
 }

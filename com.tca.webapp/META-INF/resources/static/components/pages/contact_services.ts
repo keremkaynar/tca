@@ -30,6 +30,17 @@ export class ContactServices {
 	return Observable.throw(errMsg);
 	}
 
+	createTeam(team): Observable {
+		return this.http.get(this.REST_SERVICE_URI+"createteam", team)
+		.map(res=>res.json())
+		.catch(this.handleError);
+	}
+
+	deleteTeam(teamId): Observable {
+		return this.http.get(this.REST_SERVICE_URI+"deleteteam/"+teamId)
+		.catch(this.handleError);
+	}
+
 	getAllTeams(): Observable {
 		return this.http.get(this.REST_SERVICE_URI+"getallteams")
 		.map(res=>res.json())

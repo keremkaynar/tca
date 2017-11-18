@@ -42,7 +42,7 @@ export class CreateUpdateEmployeeComponent {
 		{
 			this.contactServices.deleteContact(this.currentContact.id).subscribe(ret => {
 				this.router.navigate(["/showcontacts"]);
-			});
+			},error => console.error(error));
 		}
 	}
 	

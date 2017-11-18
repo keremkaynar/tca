@@ -14,28 +14,36 @@ import com.tca.dao.model.Team;
 @Service
 public class TcaDataService {
 
-  @Autowired
-  private ContactPersonRepository contactPersonRepository;
+	@Autowired
+	private ContactPersonRepository contactPersonRepository;
 
-  @Autowired
-  private TeamRepository teamRepository;
+	@Autowired
+	private TeamRepository teamRepository;
 
-  public List<ContactPerson> findContactPersonsByTeam(String teamName) {
-    return contactPersonRepository.findContactPersonsByTeam(teamName);
-  }
+	public List<ContactPerson> findContactPersonsByTeam(String teamName) {
+		return contactPersonRepository.findContactPersonsByTeam(teamName);
+	}
 
-  public ContactPerson saveContactPerson(ContactPerson contactPerson) {
-    return contactPersonRepository.save(contactPerson);
-  }
+	public ContactPerson saveContactPerson(ContactPerson contactPerson) {
+		return contactPersonRepository.save(contactPerson);
+	}
 
-  public void deleteContactPerson(Integer contactPersonId) {
-    contactPersonRepository.delete(contactPersonId);
-  }
+	public void deleteContactPerson(Integer contactPersonId) {
+		contactPersonRepository.delete(contactPersonId);
+	}
 
-  public List<Team> findAllTeams() {
-    Iterable<Team> teamsIterable = teamRepository.findAll();
-    List<Team> teams = new ArrayList<>();
-    teamsIterable.forEach(teams::add);
-    return teams;
-  }
+	public List<Team> findAllTeams() {
+		Iterable<Team> teamsIterable = teamRepository.findAll();
+		List<Team> teams = new ArrayList<>();
+		teamsIterable.forEach(teams::add);
+		return teams;
+	}
+
+	public void deleteTeam(Integer teamId) {
+		teamRepository.delete(teamId);
+	}
+
+	public Team createTeam(Team team) {
+		return teamRepository.save(team);
+	}
 }
