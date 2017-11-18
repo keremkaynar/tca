@@ -5,11 +5,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class EmployeeServices {
+export class ContactServices {
 
-	private REST_SERVICE_URI = 'http://localhost:8080/test.spring.boot.web.employee/';
+	private REST_SERVICE_URI = 'http://localhost:8080/tca/';
 
-	private employeeForCreateUpdate = null;
+	private contactForCreateUpdate = null;
 
 	private http: null;
 	
@@ -30,38 +30,42 @@ export class EmployeeServices {
 	return Observable.throw(errMsg);
 	}
 
-	getAllEmployees(): Observable {
-		return this.http.get(this.REST_SERVICE_URI+"getallemployees")
+	getAllTeams(): Observable {
+		return this.http.get(this.REST_SERVICE_URI+"getallteams")
+		.map(res=>res.json())
+		.catch(this.handleError);
+	}
+	
+	getAllContactsByTeamName(teamName): Observable {
+		return this.http.get(this.REST_SERVICE_URI+teamName+"/getallcontacts")
 		.map(res=>res.json())
 		.catch(this.handleError);
 	}
 
-	addEmployee(employee): Observable {
-		return this.http.post(this.REST_SERVICE_URI+"addemployee", employee)
+	addContact(contact): Observable {
+		return this.http.post(this.REST_SERVICE_URI+"addcontact", contact)
 		.map(res=>res.json())
 		.catch(this.handleError);
 	}
 
-
-	updateEmployee(employee): Observable {
-		return this.http.put(this.REST_SERVICE_URI+"updateemployee", employee)
+	updateContact(contact): Observable {
+		return this.http.put(this.REST_SERVICE_URI+"updatecontact", contact)
 		.map(res=>res.json())
 		.catch(this.handleError);
 	}
 
-	deleteEmployee(id): Observable {
-		return this.http.delete(this.REST_SERVICE_URI+"deleteemployee/"+id)
-		.map(res=>res.json())
+	deleteContact(id): Observable {
+		return this.http.delete(this.REST_SERVICE_URI+"deletecontact/"+id)
 		.catch(this.handleError);
 	}
 
-	setEmployeeForCreateUpdate(employee)
+	setContactForCreateUpdate(contact)
 	{
-		this.employeeForCreateUpdate = employee;
+		this.contactForCreateUpdate = contact;
 	}
 
-	getEmployeeForCreateUpdate()
+	getContactForCreateUpdate()
 	{
-		return this.employeeForCreateUpdate;
+		return this.contactForCreateUpdate;
 	}
 }

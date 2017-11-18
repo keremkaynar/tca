@@ -4,14 +4,14 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpModule} from '@angular/http';
 import {AppComponent} from 'appjs/app_component';
-import {ShowEmployeesComponent} from 'appjs/show_employees_component';
-import {CreateUpdateEmployeeComponent} from 'appjs/create_update_employee_component';
+import {ShowContactsComponent} from 'appjs/show_contacts_component';
+import {CreateUpdateContactComponent} from 'appjs/create_update_contact_component';
 
 const appRoutes=
 	[
-	 {path: 'showemployees', component: ShowEmployeesComponent},
-	 {path: 'createupdateemployee', component: CreateUpdateEmployeeComponent},
-	 {path: '**', component: ShowEmployeesComponent}
+	 {path: 'showcontacts', component: ShowContactsComponent},
+	 {path: 'createupdatecontact', component: CreateUpdateContactComponent},
+	 {path: '**', component: ShowContactsComponent}
 	 ];
 
 @NgModule({
@@ -25,8 +25,8 @@ const appRoutes=
     declarations: 
 		 [
 		  AppComponent,
-		  ShowEmployeesComponent,
-		  CreateUpdateEmployeeComponent,
+		  ShowContactsComponent,
+		  CreateUpdateContactComponent,
 		  ],
 	bootstrap: [AppComponent]
 })

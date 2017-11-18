@@ -1,5 +1,5 @@
 {
-  "name": "test.spring.boot.web.employee",
+  "name": "tcaWebApp",
   "version": "1.0.0",
   "scripts": {
     "test:once": "karma start karma.conf.js --single-run",
@@ -84,7 +84,7 @@
     "typescript": "~2.3.2",
     "@angular/cli": "^1.0.0",
     "ts-node": "^1.3.0",
-    "typings":"^0.6.8"
+    "typings": "^0.6.8"
   },
   "repository": {}
 }

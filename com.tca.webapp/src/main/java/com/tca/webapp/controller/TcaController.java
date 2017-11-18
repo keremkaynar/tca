@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tca.dao.model.ContactPerson;
+import com.tca.dao.model.Team;
 import com.tca.dao.service.TcaDataService;
 
 @RestController
@@ -17,6 +18,11 @@ public class TcaController {
   @Autowired
   private TcaDataService tcaDataService;
 
+  @RequestMapping(value = "/getallteams", method = RequestMethod.GET, headers = "Accept=application/json")
+  public List<Team> getAllTeams() {
+    return tcaDataService.findAllTeams();
+  }
+  
   @RequestMapping(value = "/{teamName}/getallcontacts", method = RequestMethod.GET, headers = "Accept=application/json")
   public List<ContactPerson> getAllContactPersons(@PathVariable("teamName") String teamName) {
     return tcaDataService.findContactPersonsByTeam(teamName);

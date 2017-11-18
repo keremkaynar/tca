@@ -25,6 +25,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
 	</properties>
 	<modules>
 		<module>com.tca.dao</module>
+		<module>com.tca.webapp</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
