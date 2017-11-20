@@ -1,75 +1,97 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Contacts</title>
-	<link rel="stylesheet" type="text/css"
-		href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<title>Contacts</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
 	<script type="text/javascript"
 		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js">
+		
 	</script>
-	<script type="text/javascript"
-		src="webjars/jquery/3.2.1/jquery.min.js">
+	<script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js">
+		
 	</script>
 	<script>
-    	function contactRowClicked(contactPersonId) {
-        	location.href = "/showcontactdetails?contactpersonid=" + contactPersonId;
-    	}
+		function contactRowClicked(contactPersonId) {
+			location.href = "showcontactdetails?contactpersonid="
+					+ contactPersonId;
+		}
+		function teamRowClicked(teamName) {
+			location.href = "showcontacts?teamname=" + teamName;
+		}
 	</script>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<span class="lead">Team Contacts</span>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<a th:href="@{/showcontactdetails?contactpersonid=-1}" th:disabled="${currentTeam==null}"
-					role="button" class="btn btn-default pull-right">New Contact</a>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-12">
+					<a th:href="@{/showcontactdetails?contactpersonid=-1}"
+						th:disabled="${currentTeam.name==''}" role="button"
+						class="btn btn-default pull-right">New Contact</a>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<h3>
-					<span class="label label-default">Teams</span>
-				</h3>
-				<ul class="list-group">
-					<li th:each="team : ${teams}"
-						th:class="${currentTeam==team}?'active'" class="list-group-item">
-						<a th:href="@{'/showcontacts?teamname='+${team.name}}">${team.name}</a>
-					</li>
-				</ul>
-				<form action="#" th:action="@{/createteam}" th:object="${createdTeam}" method="post">
-					<label class="control-lable" for="teamName">Team Name</label> <input
-						type="text" id="teamName" th:field="*{name}"
-						class="input-sm" placeholder="Enter team name..." />
-					<input type="submit" th:disabled="*{name==null || name==''}"
-						role="button" class="btn btn-default pull-right">Create Team</a>
-				</form>
-				<form action="#" th:action="@{/deleteteam}" th:method="post" >
-  					<input type="hidden" name="_method" value="delete" />
-  					<button type="submit" class="btn btn-default pull-right">Delete Team</button>
-				</form>
-			</div>
-			<div class="col-md-8">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Email Address</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="contact : ${contacts}"
-							th:onclick="'javascript:contactRowClicked(\'' + ${contact.id} + '\');'">
-							<td><span>${contact.id}</span></td>
-							<td><span>${contact.firstName}</span></td>
-							<td><span>${contact.lastName}</span></td>
-							<td><span>${contact.mailAddress}</span></td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="row">
+				<div class="col-md-4">
+					<h3>
+						<span class="label label-default">Teams</span>
+					</h3>
+					<ul class="list-group">
+						<li th:each="team : ${teams}" th:text="${team.name}"
+							th:onclick="'javascript:teamRowClicked(\'' + ${team.name} + '\');'"
+							th:class="${currentTeam.name}==${team.name}?'active'"
+							class="list-group-item"></li>
+					</ul>
+					<form action="#" th:action="@{/createteam}"
+						th:object="${createdTeam}" method="post" role="form">
+						<div class="form-group has-error"
+							th:if="${#fields.hasErrors('*')}">
+							<ul>
+								<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input
+									is incorrect</li>
+							</ul>
+						</div>
+						<label class="control-label"
+							th:class="${#fields.hasErrors('name')}? 'error'" for="teamName">Team
+							Name</label> <input type="text" id="teamName" th:field="*{name}"
+							class="input-sm" th:class="${#fields.hasErrors('name')}? 'error'"
+							placeholder="Enter team name..." />
+						<button type="submit" class="btn btn-default pull-right">Create
+							Team</button>
+					</form>
+					<form action="#" th:action="@{/deleteteam}" th:method="post">
+						<input type="hidden" name="_method" value="post" />
+						<button type="submit" th:disabled="${currentTeam.name==''}"
+							class="btn btn-default pull-right">Delete Team</button>
+					</form>
+				</div>
+				<div class="col-md-8">
+					<h3>
+						<span class="label label-default">Team Contacts</span>
+					</h3>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email Address</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="contact : ${contactPersons}"
+								th:onclick="'javascript:contactRowClicked(\'' + ${contact.id} + '\');'">
+								<td><span th:text="${contact.id}"/></td>
+								<td><span th:text="${contact.firstName}"/></td>
+								<td><span th:text="${contact.lastName}"/></td>
+								<td><span th:text="${contact.mailAddress}"/></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

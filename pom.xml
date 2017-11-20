@@ -14,14 +14,9 @@ http://maven.apache.org/maven-v4_0_0.xsd">
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<spring-boot.version>1.5.4.RELEASE</spring-boot.version>
-		<angular.version>4.4.4</angular.version>
+		<spring-boot.version>1.5.8.RELEASE</spring-boot.version>
 		<jquery.version>3.2.1</jquery.version>
 		<bootstrap.version>3.3.7</bootstrap.version>
-		<core-js.version>2.5.1</core-js.version>
-		<rxjs.version>2.5.3</rxjs.version>
-		<systemjs.version>0.20.15</systemjs.version>
-		<zone.js.version>0.8.16</zone.js.version>
 	</properties>
 	<modules>
 		<module>com.tca.dao</module>
