@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Contacts</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js">
+
+	</script>
+	<script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js">
+
+	</script>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="lead">Create/Edit Contact</span>
+		</div>
+		<form action="#" th:action="@{/editcontact}" th:object="${contactPerson}"
+			th:method="post">
+			<div class="row">
+				<div class="col-md-8">
+					<label class="col-md-2 control-lable" for="firstName">First
+						Name</label>
+					<div class="col-md-6">
+						<input type="text" id="firstName"
+							th:field="*{firstName}" class="input-sm"
+							placeholder="Enter your first name..." />
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8">
+					<label class="col-md-2 control-lable" for="lastName">Last
+						Name</label>
+					<div class="col-md-6">
+						<input type="text" id="lastName"
+							th:field="*{lastName}" class="input-sm"
+							placeholder="Enter your last name..." />
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8">
+					<label class="col-md-2 control-lable" for="email">Email
+						Address</label>
+					<div class="col-md-6">
+						<input type="text" id="email"
+							th:field="*{mailAddress}" class="input-sm"
+							placeholder="Enter your email..." />
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<button type="submit" name="create" th:disabled="${contactPerson.id!=-1}"
+						class="btn btn-default pull-right">Create Contact</button>
+					<button type="submit" name="update" th:disabled="${contactPerson.id==-1}"
+						class="btn btn-default pull-right">Update Contact</button>
+					<button type="submit" name="delete" th:disabled="${contactPerson.id==-1}"
+						class="btn btn-default pull-right">Delete Contact</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
