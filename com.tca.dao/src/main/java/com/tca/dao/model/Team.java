@@ -15,34 +15,34 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Team {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-	@Column(unique = true)
-	@NotEmpty(message = "Team name must not be empty.")
-	private String name;
+  @Column(unique = true)
+  @NotEmpty(message = "Team name must not be empty.")
+  private String name;
 
-	@OneToMany
-	private List<ContactPerson> contactPersons = new ArrayList<>();
+  @OneToMany
+  private List<ContactPerson> contactPersons = new ArrayList<>();
 
-	public Integer getId() {
-		return id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public List<ContactPerson> getContactPersons() {
-		return contactPersons;
-	}
+  public List<ContactPerson> getContactPersons() {
+    return contactPersons;
+  }
 
-	public void setContactPersons(List<ContactPerson> contactPersons) {
-		this.contactPersons = contactPersons;
-	}
+  public void setContactPersons(List<ContactPerson> contactPersons) {
+    this.contactPersons = contactPersons;
+  }
 }

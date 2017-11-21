@@ -12,59 +12,60 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class ContactPerson {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-	@NotEmpty(message = "First name must not be empty.")
-	private String firstName;
+  @NotEmpty(message = "First name must not be empty.")
+  private String firstName;
 
-	@NotEmpty(message = "Last name must not be empty.")
-	private String lastName;
+  @NotEmpty(message = "Last name must not be empty.")
+  private String lastName;
 
-	@Email(message = "Please provide a valid email address")
-	private String mailAddress;
+  @NotEmpty(message = "Mail address must not be empty.")
+  @Email(message = "Please provide a valid email address.")
+  private String mailAddress;
 
-	@ManyToOne
-	private Team team;
+  @ManyToOne
+  private Team team;
 
-	public Integer getId() {
-		return id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public String getFirstName() {
-		return firstName;
-	}
+  public String getFirstName() {
+    return firstName;
+  }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-	public String getLastName() {
-		return lastName;
-	}
+  public String getLastName() {
+    return lastName;
+  }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-	public String getMailAddress() {
-		return mailAddress;
-	}
+  public String getMailAddress() {
+    return mailAddress;
+  }
 
-	public void setMailAddress(String mailAddress) {
-		this.mailAddress = mailAddress;
-	}
+  public void setMailAddress(String mailAddress) {
+    this.mailAddress = mailAddress;
+  }
 
-	public Team getTeam() {
-		return team;
-	}
+  public Team getTeam() {
+    return team;
+  }
 
-	public void setTeam(Team team) {
-		this.team = team;
-	}
+  public void setTeam(Team team) {
+    this.team = team;
+  }
 }
