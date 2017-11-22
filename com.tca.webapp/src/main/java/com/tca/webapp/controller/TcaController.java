@@ -102,7 +102,7 @@ public class TcaController {
   }
 
   @RequestMapping(value = "/editcontact", params = "delete", method = RequestMethod.POST)
-  public String deleteContactPerson(BindingResult bindingResult, @ModelAttribute("currentTeam") Team currentTeam,
+  public String deleteContactPerson(@ModelAttribute("currentTeam") Team currentTeam,
       @ModelAttribute("contactPerson") ContactPerson contactPerson) {
     contactPerson.setTeam(currentTeam);
     tcaDataService.deleteContactPerson(contactPerson.getId());

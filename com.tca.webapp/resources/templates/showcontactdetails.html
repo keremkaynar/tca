@@ -6,71 +6,79 @@
 	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
-	<h3>
-		<span class="label label-default">Create/Edit Contact</span>
-	</h3>
-	<div class="container">
-	<div class="row">
-	<div class="col-xs-8">
-	<form action="#" th:action="@{/editcontact}"
-		th:object="${contactPerson}" th:method="post" role="form">
-		<div class="form-group has-error" th:if="${#fields.hasErrors('*')}">
-			<ul>
-				<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input
-					is incorrect</li>
-			</ul>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="lead">Create/Edit Contact</span>
 		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-8">
+					<form action="#" th:action="@{/editcontact}"
+						th:object="${contactPerson}" th:method="post" role="form">
+						<div class="form-group has-error"
+							th:if="${#fields.hasErrors('*')}">
+							<ul>
+								<li th:each="err : ${#fields.errors('*')}" th:text="${err}" th:class="${#fields.hasErrors('*')}? 'text-danger'">
+								Input is incorrect</li>
+							</ul>
+						</div>
 
-			<div class="form-group">
-				<label th:class="${#fields.hasErrors('firstName')}? 'text-danger'"
-					for="firstName" class="col-xs-2">First Name</label>
-				<div class="col-xs-6">
-				<input type="text"
-					id="firstName" th:field="*{firstName}" class="form-control"
-					th:class="${#fields.hasErrors('firstName')}? 'is-invalid'"
-					placeholder="Enter your first name..." /> <input type="hidden"
-					id="id" th:field="*{id}" />
+						<div class="form-group">
+							<div class="col-md-2">
+								<label
+								th:class="${#fields.hasErrors('firstName')}? 'text-danger'"
+								for="firstName" class="control-label">First Name:</label>
+							</div>
+							<input
+								type="text" id="firstName" th:field="*{firstName}"
+								class="form-control col-md-6"
+								th:class="${#fields.hasErrors('firstName')}? 'is-invalid'"
+								placeholder="Enter your first name..." /> <input type="hidden"
+								id="id" th:field="*{id}" />
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-2">
+								<label th:class="${#fields.hasErrors('lastName')}? 'text-danger'"
+								for="lastName" class="control-label">Last Name:</label>
+							</div>
+							<input
+								type="text" id="lastName" th:field="*{lastName}"
+								class="form-control col-md-6"
+								th:class="${#fields.hasErrors('lastName')}? 'is-invalid'"
+								placeholder="Enter your last name..." />
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-2">
+								<label
+								th:class="${#fields.hasErrors('mailAddress')}? 'text-danger'"
+								for="email" class="control-label">Email Address:</label>
+							</div>
+							<input
+								type="text" id="email" th:field="*{mailAddress}"
+								class="form-control col-md-6"
+								th:class="${#fields.hasErrors('mailAddress')}? 'is-invalid'"
+								placeholder="Enter your email..." />
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-8">
+								<button type="submit" name="create"
+									th:disabled="${contactPerson.id!=-1}"
+									class="btn btn-default pull-left">Create Contact</button>
+								<button type="submit" name="update"
+									th:disabled="${contactPerson.id==-1}"
+									class="btn btn-default pull-left">Update Contact</button>
+								<button type="submit" name="delete"
+									th:disabled="${contactPerson.id==-1}"
+									class="btn btn-default pull-left">Delete Contact</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-
-			<div class="form-group">
-				<label th:class="${#fields.hasErrors('lastName')}? 'text-danger'"
-					for="lastName" class="col-xs-2">Last Name</label>
-				<div class="col-xs-6">
-				<input type="text" id="lastName"
-					th:field="*{lastName}" class="form-control"
-					th:class="${#fields.hasErrors('lastName')}? 'is-invalid'"
-					placeholder="Enter your last name..." />
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label th:class="${#fields.hasErrors('mailAddress')}? 'text-danger'"
-					for="email" class="col-xs-2">Email Address</label>
-				<div class="col-xs-6">
-				<input type="text" id="email"
-					th:field="*{mailAddress}" class="form-control"
-					th:class="${#fields.hasErrors('mailAddress')}? 'is-invalid'"
-					placeholder="Enter your email..." />
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-xs-offset-2 col-xs-6">
-				<button type="submit" name="create"
-					th:disabled="${contactPerson.id!=-1}" class="btn btn-default">Create
-					Contact</button>
-				<button type="submit" name="update"
-					th:disabled="${contactPerson.id==-1}" class="btn btn-default">Update
-					Contact</button>
-				<button type="submit" name="delete"
-					th:disabled="${contactPerson.id==-1}" class="btn btn-default">Delete
-					Contact</button>
-				</div>
-			</div>
-	</form>
-	</div>
-	</div>
+		</div>
 	</div>
 	<script type="text/javascript"
 		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js">
