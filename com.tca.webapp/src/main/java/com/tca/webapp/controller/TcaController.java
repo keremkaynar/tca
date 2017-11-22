@@ -2,9 +2,15 @@ package com.tca.webapp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,7 +30,12 @@ public class TcaController {
   @Autowired
   private TcaDataService tcaDataService;
 
-  @RequestMapping(value = "/showcontacts", method = RequestMethod.GET)
+  @RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
+  public String loginPage() {
+    return "login";
+  }
+
+  @RequestMapping(value = { "/showcontacts" }, method = RequestMethod.GET)
   public String showContacts(ModelMap attributes,
       @RequestParam(value = "teamname", required = false, defaultValue = "") String teamName) {
     List<Team> teams = tcaDataService.findAllTeams();
@@ -107,6 +118,34 @@ public class TcaController {
     contactPerson.setTeam(currentTeam);
     tcaDataService.deleteContactPerson(contactPerson.getId());
     return "redirect:/showcontacts?" + "teamname=" + contactPerson.getTeam().getName();
+  }
+
+  @RequestMapping(value = "/logout", method = RequestMethod.GET)
+  public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth != null) {
+      new SecurityContextLogoutHandler().logout(request, response, auth);
+    }
+    return "redirect:/login?logout";
+  }
+
+  @RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+  public String accessDeniedPage(ModelMap model) {
+    model.addAttribute("user", getPrincipal());
+    return "accessDenied";
+  }
+
+  private String getPrincipal() {
+    String userName = null;
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if (principal != null) {
+      if (principal instanceof UserDetails) {
+        userName = ((UserDetails) principal).getUsername();
+      } else {
+        userName = principal.toString();
+      }
+    }
+    return userName;
   }
 
   private Team findCurrentTeamByName(List<Team> teams, String queryTeamName) {

@@ -1,17 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Contacts</title>
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<title>Contacts</title>
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
 	<script type="text/javascript"
 		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js">
-
 	</script>
 	<script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js">
-
 	</script>
 	<script>
 		function contactRowClicked(contactPersonId) {
@@ -29,6 +26,8 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-12">
+					<a th:href="@{/logout}" role="button"
+						class="btn btn-default pull-right">Logout</a>
 					<a th:href="@{/showcontactdetails?contactpersonid=-1}"
 						th:disabled="${currentTeam.name==''}" role="button"
 						class="btn btn-default pull-right">New Contact</a>
